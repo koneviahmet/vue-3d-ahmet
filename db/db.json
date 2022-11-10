@@ -1,0 +1,61 @@
+{
+  "users": [
+    {
+      "email": "koneviahmet@gmail.com",
+      "name": "Ahmet",
+      "lastName": "Şıkss",
+      "password": "123456",
+      "role": 2,
+      "id": 1
+    },
+    {
+      "email": "asdasd@asd.com",
+      "name": "asd",
+      "lastName": "asd",
+      "password": "asdasd",
+      "token": 9,
+      "role": 2,
+      "id": 2
+    }
+  ],
+  "schema": [
+    {
+      "id": 1,
+      "schemaText": "caf"
+    },
+    {
+      "id": 2,
+      "schemaText": "2 asd"
+    },
+    {
+      "schemaText": "add",
+      "extra": "extra info",
+      "id": 3
+    },
+    {
+      "schemaText": "asd",
+      "id": 4
+    },
+    {
+      "schemaText": "asd",
+      "id": 5
+    },
+    {
+      "schemaText": "asdasd",
+      "id": 6
+    },
+    {
+      "schemaText": "sadasd",
+      "id": 7
+    },
+    {
+      "schemaText": "sadasd",
+      "id": 8
+    },
+    {
+      "schemaText": "asd",
+      "id": 9
+    }
+  ],
+  "empty": []
+}
