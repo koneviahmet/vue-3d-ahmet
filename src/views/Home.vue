@@ -8,6 +8,8 @@
     <button class="btn btn-sm" :class="tab == 'six' && 'btn-primary'" @click="tab = 'six'">6</button>
     <button class="btn btn-sm" :class="tab == 'seven' && 'btn-primary'" @click="tab = 'seven'">7</button>
     <button class="btn btn-sm" :class="tab == 'eight' && 'btn-primary'" @click="tab = 'eight'">8</button>
+    <button class="btn btn-sm" :class="tab == 'nine' && 'btn-primary'" @click="tab = 'nine'">9</button>
+    <button class="btn btn-sm" :class="tab == 'ten' && 'btn-primary'" @click="tab = 'ten'">10</button>
   </div>
   <One v-if="tab == 'one'"/>
   <Two v-if="tab == 'two'"/>
@@ -17,6 +19,8 @@
   <Six v-if="tab == 'six'"/>
   <Seven v-if="tab == 'seven'"/>
   <Eight v-if="tab == 'eight'"/>
+  <Nine v-if="tab == 'nine'"/>
+  <Ten v-if="tab == 'ten'"/>
 </template>
 
 
@@ -30,9 +34,11 @@ import Five from './3d/five.vue'
 import Six from './3d/six.vue'
 import Seven from './3d/seven.vue'
 import Eight from './3d/eight.vue'
+import Nine from './3d/nine.vue'
+import Ten from './3d/ten.vue'
 import {ref} from "vue"
 
-const tab = ref('eight')
+const tab = ref('ten')
 
 
 

@@ -10,10 +10,15 @@
       <button class="btn btn-sm" 
         v-for="m in meshes" 
         :key="m"
-        @click="setVisible(m)"
-        :class="visible.includes(m) && 'btn-primary'"
+        @click="visible = m"
+        :class="visible == m && 'btn-primary'"
         >
         mesh {{m}}
+      </button>
+      <button class="btn btn-sm" 
+        @click="visible = null"
+        >
+        clear
       </button>
   </div>
 
@@ -53,7 +58,7 @@ const select_anim       = ref(0)
 const object            = ref()
 const action            = ref(null)
 const meshes            = ref([])
-const visible           = ref([])
+const visible           = ref(null)
 
 
 
@@ -68,10 +73,9 @@ watch(select_anim, () => {
 
 watch(visible, () => {
   action.value.stop()
-  console.log("değişti");
   setTimeout(() => {
     setAnimation(object.value.o3d)
-  }, 200);
+  }, 100);
 })
 
 
@@ -99,7 +103,7 @@ const setAnimation = (object) => {
         }
 
         child.visible = true
-        if (visible.value.includes(child.ID)) {
+        if (visible.value == child.ID) {
           child.visible = false
         }       
 
@@ -117,13 +121,5 @@ const setAnimation = (object) => {
 
 
 
-const setVisible = (mesh) => {
-  console.log("mesh", mesh);
-  if(visible.value.includes(mesh)){
-    visible.value =  [...visible.value.filter(i => i != mesh)]
-  }else{
-    visible.value.push(mesh)
-  }
-}
 
 </script>

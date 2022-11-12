@@ -10,27 +10,31 @@
       <button class="btn btn-sm" 
         v-for="m in meshes" 
         :key="m"
-        @click="setVisible(m)"
-        :class="visible.includes(m) && 'btn-primary'"
+        @click="visible = m"
+        :class="visible == m && 'btn-primary'"
         >
         mesh {{m}}
+      </button>
+      <button class="btn btn-sm" 
+        @click="visible = null"
+        >
+        clear
       </button>
   </div>
 
 
   <Renderer ref="renderer" antialias :orbit-ctrl="{ enableDamping: true, target }" resize="window" shadow>
-
-    <Camera :position="{ x: 200, y: 200, z: 200 }" />
+    <Camera :position="{ x: 100, y: 200, z: 300 }" />
     <Scene :background="'#fff'">
       <HemisphereLight />
 
       <DirectionalLight
-        :position="{ x: 0, y: 200, z: 100 }"
+        :position="{ x: 100, y: 200, z: 100 }"
         cast-shadow :shadow-camera="{ top: 180, bottom: -120, left: -120, right: 120 }"
       />
 
-    
-      <FbxModel ref="object" src="dancing.fbx" @load="onLoad" />
+      <!-- <GltfModel src="suziki.glb"  @load="onLoad"/> -->
+      <FbxModel ref="object" src="fox.fbx" @load="onLoad"/>
       
     </Scene>
   </Renderer> 
@@ -41,24 +45,24 @@
 <script setup>
 import { AnimationMixer, Clock, Fog, GridHelper, Vector3 } from 'three';
 
-import { Box, Camera, LambertMaterial, HemisphereLight, Renderer, Scene, FbxModel} from 'troisjs';
+import { Box, Camera, LambertMaterial, HemisphereLight, Renderer, Scene, FbxModel, GltfModel} from 'troisjs';
 import {ref, onMounted, watch} from 'vue'
 const renderer = ref()
 
 const animation_arr = ref(null);
-
-
 const target            = ref(new Vector3(0, 100, 0));
 const select_anim       = ref(0)
 const object            = ref()
 const action            = ref(null)
 const meshes            = ref([])
-const visible           = ref([])
-
+const visible           = ref(null)
 
 
 watch(select_anim, () => {
-  action.value.stop()
+  if (action.value) {
+    action.value.stop()
+  }
+  
   
   setTimeout(() => {
     setAnimation(object.value.o3d)
@@ -67,11 +71,13 @@ watch(select_anim, () => {
 
 
 watch(visible, () => {
-  action.value.stop()
-  console.log("değişti");
+  if (action.value) {
+    action.value.stop()
+  }
+
   setTimeout(() => {
     setAnimation(object.value.o3d)
-  }, 200);
+  }, 100);
 })
 
 
@@ -86,12 +92,20 @@ const onLoad = (object) => {
 
 
 const setAnimation = (object) => {
-  if (object?.animations) {
+
+  if (object?.animations && object?.animations.length > 0) {
     let mixer = new AnimationMixer(object);
     action.value = mixer.clipAction(object.animations[select_anim.value]);
     action.value.play();
 
-   
+    let clock = new Clock();
+    renderer.value.onBeforeRender(() => {
+      mixer.update(clock.getDelta());
+    });    
+  }
+
+
+  if (object?.traverse && object?.traverse.length > 0) {
     object.traverse((child) => {
       if (child.isMesh) {
         if (!meshes.value.includes(child.ID)) {
@@ -99,31 +113,18 @@ const setAnimation = (object) => {
         }
 
         child.visible = true
-        if (visible.value.includes(child.ID)) {
+        if (visible.value == child.ID) {
           child.visible = false
         }       
 
       }
     });
-
-
-    let clock = new Clock();
-    renderer.value.onBeforeRender(() => {
-      mixer.update(clock.getDelta());
-    });
-    
   }
+
+
 }
 
 
 
-const setVisible = (mesh) => {
-  console.log("mesh", mesh);
-  if(visible.value.includes(mesh)){
-    visible.value =  [...visible.value.filter(i => i != mesh)]
-  }else{
-    visible.value.push(mesh)
-  }
-}
 
 </script>
