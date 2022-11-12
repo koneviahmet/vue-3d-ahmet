@@ -5,12 +5,18 @@
     <button class="btn btn-sm" :class="tab == 'three' && 'btn-primary'" @click="tab = 'three'">3</button>
     <button class="btn btn-sm" :class="tab == 'four' && 'btn-primary'" @click="tab = 'four'">4</button>
     <button class="btn btn-sm" :class="tab == 'five' && 'btn-primary'" @click="tab = 'five'">5</button>
+    <button class="btn btn-sm" :class="tab == 'six' && 'btn-primary'" @click="tab = 'six'">6</button>
+    <button class="btn btn-sm" :class="tab == 'seven' && 'btn-primary'" @click="tab = 'seven'">7</button>
+    <button class="btn btn-sm" :class="tab == 'eight' && 'btn-primary'" @click="tab = 'eight'">8</button>
   </div>
   <One v-if="tab == 'one'"/>
   <Two v-if="tab == 'two'"/>
   <Three v-if="tab == 'three'"/>
   <Four v-if="tab == 'four'"/>
   <Five v-if="tab == 'five'"/>
+  <Six v-if="tab == 'six'"/>
+  <Seven v-if="tab == 'seven'"/>
+  <Eight v-if="tab == 'eight'"/>
 </template>
 
 
@@ -21,9 +27,15 @@ import Two from './3d/two.vue'
 import Three from './3d/three.vue'
 import Four from './3d/four.vue'
 import Five from './3d/five.vue'
+import Six from './3d/six.vue'
+import Seven from './3d/seven.vue'
+import Eight from './3d/eight.vue'
 import {ref} from "vue"
 
-const tab = ref('five')
+const tab = ref('eight')
+
+
+
 
 
 </script>
