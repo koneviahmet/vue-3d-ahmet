@@ -11,6 +11,9 @@
     <button class="btn btn-sm" :class="tab == 'nine' && 'btn-primary'" @click="tab = 'nine'">9</button>
     <button class="btn btn-sm" :class="tab == 'ten' && 'btn-primary'" @click="tab = 'ten'">10</button>
     <button class="btn btn-sm" :class="tab == 'eleven' && 'btn-primary'" @click="tab = 'eleven'">11</button>
+    <button class="btn btn-sm" :class="tab == 'twelve' && 'btn-primary'" @click="tab = 'twelve'">Abaküs</button>
+    <button class="btn btn-sm" :class="tab == 'on2' && 'btn-primary'" @click="tab = 'on2'">Ampül</button>
+    <button class="btn btn-sm" :class="tab == 'on3' && 'btn-primary'" @click="tab = 'on3'">6Gen</button>
   </div>
   <One v-if="tab == 'one'"/>
   <Two v-if="tab == 'two'"/>
@@ -23,6 +26,9 @@
   <Nine v-if="tab == 'nine'"/>
   <Ten v-if="tab == 'ten'"/>
   <Eleven v-if="tab == 'eleven'"/>
+  <Twelve v-if="tab == 'twelve'"/>
+  <On2 v-if="tab == 'on2'"/>
+  <On3 v-if="tab == 'on3'"/>
 </template>
 
 
@@ -39,9 +45,14 @@ import Eight from './3d/eight.vue'
 import Nine from './3d/nine.vue'
 import Ten from './3d/ten.vue'
 import Eleven from './3d/eleven.vue'
+import Twelve from './3d/twelve.vue'
+import On2 from './3d/on2.vue'
+import On3 from './3d/on3.vue'
+
+
 import {ref} from "vue"
 
-const tab = ref('eleven')
+const tab = ref('twelve')
 
 
 
