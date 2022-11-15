@@ -24,14 +24,18 @@
 
 
 <Renderer ref="renderer" antialias orbit-ctrl resize="window" shadow>
-  <Camera :position="{ x: 700, y: 700, z: 700 }" />
-  <Scene :background="'#fff'">
+  <Camera :position="{ x: 300, y: 300, z: 300 }" />
+  <Scene :background="'#f1f1f1'">
     <HemisphereLight />
 
+    <DirectionalLight
+        :position="{ x: 0, y: 200, z: 100 }"
+        cast-shadow :shadow-camera="{ top: 180, bottom: -120, left: -120, right: 120 }"
+      />
 
 
     <!-- <GltfModel src="suziki.glb"  @load="onLoad"/> -->
-    <FbxModel ref="object" src="abakus.fbx" @load="onLoad"/>
+    <FbxModel ref="object" src="6Gen.fbx" @load="onLoad"/>
     
   </Scene>
 </Renderer> 

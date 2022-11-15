@@ -20,9 +20,13 @@
       >
       clear
     </button>
+  </div>
+
+<div class="fixed w-full h-full bg-blue-200" v-if="!isShow">
+  <div class="flex items-center justify-center w-full h-full font-bold">
+      Yükleniyor {{progress}}
+  </div>
 </div>
-
-
 <Renderer ref="renderer" antialias orbit-ctrl resize="window" shadow>
   <Camera :position="{ x: 700, y: 700, z: 700 }" />
   <Scene :background="'#fff'">
@@ -31,7 +35,7 @@
 
 
     <!-- <GltfModel src="suziki.glb"  @load="onLoad"/> -->
-    <FbxModel ref="object" src="abakus.fbx" @load="onLoad"/>
+    <FbxModel ref="object" src="abakus.fbx" @load="onLoad" @progress="setProgress"/>
     
   </Scene>
 </Renderer> 
@@ -53,37 +57,41 @@ const object            = ref()
 const action            = ref(null)
 const meshes            = ref([])
 const visible           = ref(null)
-
+const progress          = ref(0)
+const isShow            = ref(false)
 
 watch(select_anim, () => {
-if (action.value) {
-  action.value.stop()
-}
+  if (action.value) {
+    action.value.stop()
+  }
 
-
-setTimeout(() => {
-  setAnimation(object.value.o3d)
-}, 100);
+  setTimeout(() => {
+    setAnimation(object.value.o3d)
+  }, 100);
 })
-
 
 watch(visible, () => {
-if (action.value) {
-  action.value.stop()
-}
+  if (action.value) {
+    action.value.stop()
+  }
 
-setTimeout(() => {
-  setAnimation(object.value.o3d)
-}, 100);
+  setTimeout(() => {
+    setAnimation(object.value.o3d)
+  }, 100);
 })
 
 
-const onLoad = (object) => {
-if (!animation_arr.value) {
-  animation_arr.value =  object?.animations
-}
+const setProgress = (e) => {
+  progress.value = ((e.loaded*100) / e.total).toFixed(2)
+} 
 
-setAnimation(object);
+const onLoad = (object) => {
+  if (!animation_arr.value) {
+    animation_arr.value =  object?.animations
+  }
+
+  isShow.value = true
+  setAnimation(object);
 }
 
 

@@ -24,14 +24,14 @@
 
 
 <Renderer ref="renderer" antialias orbit-ctrl resize="window" shadow>
-  <Camera :position="{ x: 700, y: 700, z: 700 }" />
-  <Scene :background="'#fff'">
+  <Camera :position="{ x: 300, y: 300, z: 300 }" />
+  <Scene :background="'#999'">
     <HemisphereLight />
 
 
 
     <!-- <GltfModel src="suziki.glb"  @load="onLoad"/> -->
-    <FbxModel ref="object" src="abakus.fbx" @load="onLoad"/>
+    <FbxModel ref="object" src="ampul.fbx" @load="onLoad"/>
     
   </Scene>
 </Renderer> 
