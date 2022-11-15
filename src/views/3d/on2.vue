@@ -28,7 +28,10 @@
   <Scene :background="'#999'">
     <HemisphereLight />
 
-
+    <DirectionalLight
+        :position="{ x: 200, y: 200, z: 100 }"
+        cast-shadow :shadow-camera="{ top: 180, bottom: -120, left: -120, right: 120 }"
+      />
 
     <!-- <GltfModel src="suziki.glb"  @load="onLoad"/> -->
     <FbxModel ref="object" src="ampul.fbx" @load="onLoad"/>
