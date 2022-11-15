@@ -34,7 +34,7 @@
       />
 
     <!-- <GltfModel src="suziki.glb"  @load="onLoad"/> -->
-    <FbxModel ref="object" src="ampul.fbx" @load="onLoad"/>
+    <FbxModel ref="object" src="ampul.fbx" @load="onLoad" />
     
   </Scene>
 </Renderer> 

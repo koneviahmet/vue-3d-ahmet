@@ -19,24 +19,30 @@
       @click="visible = null"
       >
       clear
-    </button>
+    </button> 
+    <div>{{progress}}</div>
 </div>
 
 
 <Renderer ref="renderer" antialias orbit-ctrl resize="window" shadow>
-  <Camera :position="{ x: 300, y: 300, z: 300 }" />
-  <Scene :background="'#f1f1f1'">
-    <HemisphereLight />
+  <Camera :position="{   z: 10}"  />
 
-    <DirectionalLight
-        :position="{ x: 0, y: 200, z: 100 }"
-        cast-shadow :shadow-camera="{ top: 180, bottom: -120, left: -120, right: 120 }"
+  <Scene :background="'#333'">
+     <!--      <HemisphereLight /> -->
+
+     <DirectionalLight
+        :intensity="0.5"
+        color="#fff"
+        :position="{ x: 200, y: 100, z: 50 }"
+        cast-shadow 
       />
+      
 
 
-    <!-- <GltfModel src="suziki.glb"  @load="onLoad"/> -->
-    <FbxModel ref="object" src="6Gen.fbx" @load="onLoad"/>
-    
+      <Box v-for="i in 5" :position="{ x: -6 + i * 2 }" :key="i">
+        <LambertMaterial/>
+      </Box>
+
   </Scene>
 </Renderer> 
 </template>
@@ -46,7 +52,7 @@
 <script setup>
 import { AnimationMixer, Clock, Fog, GridHelper, Vector3 } from 'three';
 
-import { Box, Camera, LambertMaterial, HemisphereLight, Renderer, Scene, FbxModel, GltfModel} from 'troisjs';
+// import { Box, Camera, DirectionalLight, Renderer, Scene, FbxModel, GltfModel, HemisphereLight} from 'troisjs';
 import {ref, onMounted, watch} from 'vue'
 const renderer = ref()
 
@@ -57,12 +63,13 @@ const object            = ref()
 const action            = ref(null)
 const meshes            = ref([])
 const visible           = ref(null)
-
+const progress          = ref(0)
 
 watch(select_anim, () => {
 if (action.value) {
   action.value.stop()
 }
+
 
 
 setTimeout(() => {
@@ -126,6 +133,8 @@ if (object?.traverse && object?.traverse.length > 0) {
 }
 
 
-
+const setProgress = (e) => {
+  progress.value = ((e.loaded*100) / e.total).toFixed(2)
+} 
 
 </script>

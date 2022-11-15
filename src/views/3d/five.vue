@@ -4,7 +4,7 @@
     <button class="btn btn-sm" @click="scene_background = '#a0a0a0'">Color 2</button>
     <button class="btn btn-sm" @click="scene_background = '#e9290f'">Color 3</button>
 
-    <button class="btn btn-sm" v-for="(a, key) in animation_arr" :v-key="a.uuid" @click="select_anim = key">
+    <button class="btn btn-sm" v-for="(a, key) in animation_arr" :key="a.uuid" @click="select_anim = key">
       anim {{key + 1}}
     </button>
   </div>

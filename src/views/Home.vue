@@ -13,7 +13,7 @@
     <button class="btn btn-sm" :class="tab == 'eleven' && 'btn-primary'" @click="tab = 'eleven'">11</button>
     <button class="btn btn-sm" :class="tab == 'twelve' && 'btn-primary'" @click="tab = 'twelve'">Abaküs</button>
     <button class="btn btn-sm" :class="tab == 'on2' && 'btn-primary'" @click="tab = 'on2'">Ampül</button>
-    <button class="btn btn-sm" :class="tab == 'on3' && 'btn-primary'" @click="tab = 'on3'">6Gen</button>
+    <button class="btn btn-sm" :class="tab == 'on3' && 'btn-primary'" @click="tab = 'on3'">Serbes</button>
   </div>
   <One v-if="tab == 'one'"/>
   <Two v-if="tab == 'two'"/>
@@ -52,7 +52,7 @@ import On3 from './3d/on3.vue'
 
 import {ref} from "vue"
 
-const tab = ref('twelve')
+const tab = ref('on3')
 
 
 
